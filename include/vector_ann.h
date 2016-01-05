@@ -73,7 +73,7 @@ void forward_propagation(struct ann* net);
 /****************************************************************************
  * Backward propagation of errors on output values from forward propagation *
  ****************************************************************************/
-void backward_propagation(struct ann* net, float* expected_output);
+void backward_propagation(struct ann* net, float* known_output);
 
 /**********************************************************
  * Perform one training cycle with given training samples *
