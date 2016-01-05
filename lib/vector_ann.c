@@ -24,3 +24,25 @@ void init_weights(struct ann *net){
         }
     }
 }
+
+void init_io(struct ann* net){
+    const size_t num_layers = net->num_layers;
+    const size_t* num_nodes = net->num_nodes;
+
+    // Allocate memory for input and output values
+    size_t alignment = volk_get_alignment();
+    net->layer_input = (float**) volk_malloc(sizeof(float*)*num_layers, alignment);
+    net->layer_output = (float**) volk_malloc(sizeof(float*)*num_layers, alignment);
+
+    for(size_t i=0; i<num_layers; i++){
+        net->layer_input[i] = (float*) volk_malloc(sizeof(float)*num_nodes[i], alignment);
+        net->layer_output[i] = (float*) volk_malloc(sizeof(float)*num_nodes[i], alignment);
+    }
+}
+
+void forward_propagation(struct ann* net){
+    const size_t num_layers = net->num_layers;
+    const size_t* num_nodes = net->num_nodes;
+
+    // Do forward propagation
+}
