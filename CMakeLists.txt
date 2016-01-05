@@ -8,6 +8,9 @@ project(vecotr_ann C)
 set(CMAKE_C_COMPILER "gcc")
 set(CMAKE_C_FLAGS "-Wall -O2 -fPIC")
 
+# Enable test cases
+enable_testing()
+
 # Add include dir
 include_directories(include)
 
