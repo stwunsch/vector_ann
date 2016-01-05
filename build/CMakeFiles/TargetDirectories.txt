@@ -1,1 +1,0 @@
-/home/stefan/src/vector_ann/build/lib/CMakeFiles/vector_ann.dir
