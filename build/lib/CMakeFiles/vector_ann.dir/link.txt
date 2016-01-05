@@ -1,0 +1,1 @@
+gcc  -fPIC -Wall -O2 -fPIC  -shared -Wl,-soname,libvector_ann.so -o libvector_ann.so CMakeFiles/vector_ann.dir/vector_ann.c.o -lvolk 
