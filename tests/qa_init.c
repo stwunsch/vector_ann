@@ -10,7 +10,7 @@ int main(){
     net.num_nodes[2] = 1;
 
     // Init weights
-    init_weights(&net);
+    init_weights(&net, 0);
 
     // Check for values out of [-1,1] in weights
     float*** weights = net.weights;

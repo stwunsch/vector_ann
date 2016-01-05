@@ -1,18 +1,22 @@
 # Define test case sources
-FILE(GLOB TEST_CASE_LIST "qa_*.c")
+set(TEST_CASE_LIST
+    qa_init
+    qa_forward_propagation
+    qa_backward_propagation
+    qa_train)
 
 # Go through sources and add tests to test system
 FOREACH(TEST_CASE ${TEST_CASE_LIST})
-    # Cut filename
-    STRING(REPLACE ".c" "" TEST_CASE_NAME ${TEST_CASE})
-    STRING(REPLACE ${CMAKE_CURRENT_SOURCE_DIR}/ "" TEST_CASE_NAME ${TEST_CASE_NAME})
+    # Set source path
+    SET(TEST_CASE_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/${TEST_CASE}.c)
 
     # Add test executables
-    add_executable(${TEST_CASE_NAME} ${TEST_CASE})
+    add_executable(${TEST_CASE} ${TEST_CASE_SOURCE})
 
     # Link test executables to project
-    target_link_libraries(${TEST_CASE_NAME} vector_ann)
+    # NOTE: m is the std math library
+    target_link_libraries(${TEST_CASE} m vector_ann)
 
     # Add tests to test system
-    add_test(${TEST_CASE_NAME} ${TEST_CASE_NAME})
+    add_test(${TEST_CASE} ${TEST_CASE})
 ENDFOREACH(TEST_CASE)
