@@ -26,23 +26,23 @@ int main(){
     // Do forward propagation
     forward_propagation(&net);
 
-    // Set expected output
+    // Set known output
     size_t alignment = volk_get_alignment();
-    float* expected_output = (float*) volk_malloc(sizeof(float)*net.num_nodes[2], alignment);
-    expected_output[0] = 1.0;
-    expected_output[1] = -1.0;
+    float* known_output = (float*) volk_malloc(sizeof(float)*net.num_nodes[2], alignment);
+    known_output[0] = 1.0;
+    known_output[1] = -1.0;
 
     // Set learn rate
     net.learn_rate = 1.0;
 
     // Do backward propagation
-    backward_propagation(&net, expected_output);
+    backward_propagation(&net, known_output);
 
-    // Compare change of weights to expected values
+    // Compare change of weights to known values
     // TODO
 
     // Clean-up
-    volk_free(expected_output);
+    volk_free(known_output);
 
     return 0;
 }

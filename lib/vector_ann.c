@@ -71,7 +71,7 @@ void forward_propagation(struct ann* net){
     }
 }
 
-void backward_propagation(struct ann* net, float* expected_output){
+void backward_propagation(struct ann* net, float* known_output){
     const size_t num_layers = net->num_layers;
     const size_t* num_nodes = net->num_nodes;
     const float beta = net->beta;
@@ -80,7 +80,7 @@ void backward_propagation(struct ann* net, float* expected_output){
 
     // Propagate from output layer to previous layer
     for(i=0; i<num_nodes[num_layers-1]; i++){
-        net->layer_error[num_layers-1][i] = activ_func_deriv(net->layer_input[num_layers-1][i], net->beta)*(expected_output[i]-net->layer_output[num_layers-1][i]);
+        net->layer_error[num_layers-1][i] = activ_func_deriv(net->layer_input[num_layers-1][i], net->beta)*(known_output[i]-net->layer_output[num_layers-1][i]);
     }
 
     // Propagate backward through rest of the network
@@ -104,7 +104,7 @@ void backward_propagation(struct ann* net, float* expected_output){
     }
 }
 
-void training_cycle(struct ann* net, float** known_input, float** expected_output, size_t num_samples){
+void training_cycle(struct ann* net, float** known_input, float** known_output, size_t num_samples){
     const size_t num_layers = net->num_layers;
     const size_t* num_nodes = net->num_nodes;
     size_t i, j;
@@ -112,8 +112,10 @@ void training_cycle(struct ann* net, float** known_input, float** expected_outpu
     for(i=0; i<num_samples; i++){
         for(j=0; j<num_nodes[0]; j++) net->layer_input[0][j] = known_input[i][j];
         forward_propagation(net);
-        backward_propagation(net, expected_output[i]);
+        backward_propagation(net, known_output[i]);
     }
 }
 
-
+void sample_error(struct ann* net, float** known_input, float** known_output, size_t num_samples){
+    // TODO
+}

@@ -75,7 +75,13 @@ void forward_propagation(struct ann* net);
  ****************************************************************************/
 void backward_propagation(struct ann* net, float* expected_output);
 
-/********************************************************
- * Perform one trianing cycle on given training samples *
- ********************************************************/
-void training_cycle(struct ann* net, float** known_input, float** expected_output, size_t num_samples);
+/**********************************************************
+ * Perform one training cycle with given training samples *
+ **********************************************************/
+void training_cycle(struct ann* net, float** known_input, float** known_output, size_t num_samples);
+
+/*****************************************************
+ * Calculate mean error of network output with given *
+ * training samples to estimate training progress    *
+ *****************************************************/
+void sample_error(struct ann* net, float** known_input, float** known_output, size_t num_samples);
