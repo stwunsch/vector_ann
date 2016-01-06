@@ -6,11 +6,11 @@ int main(){
     net.num_layers = 3;
     net.num_nodes = (size_t*) malloc(sizeof(size_t)*net.num_layers);
     net.num_nodes[0] = 2;
-    net.num_nodes[1] = 3;
+    net.num_nodes[1] = 5;
     net.num_nodes[2] = 1;
 
     // Init weights
-    uint32_t seed = 1234;
+    uint32_t seed = 0;
     init_weights(&net, seed);
 
     // Setup
@@ -37,26 +37,15 @@ int main(){
         else known_output[i][0] = 0;
     }
 
-    // Try some input values
-    size_t num_test = 5;
-    for(size_t i=0; i<num_test; i++){
-        net.layer_input[0][0] = known_input[i][0];
-        net.layer_input[0][1] = known_input[i][1];
-        forward_propagation(&net);
-        printf("[BEFORE]\t%i:\t%f\t->\t%f\n", i, net.layer_input[0][1]+net.layer_input[0][1], net.layer_output[2][0]);
-    }
+    // Get mean output error on sample
+    printf("[SAMPLE ERROR] Value: %f\n", sample_error(&net, known_input, known_output, num_samples));
 
     // Run one training cycle
     printf("[TRAINING]\n");
     training_cycle(&net, known_input, known_output, num_samples);
 
-    // Try some input values again
-    for(size_t i=0; i<num_test; i++){
-        net.layer_input[0][0] = known_input[i][0];
-        net.layer_input[0][1] = known_input[i][1];
-        forward_propagation(&net);
-        printf("[AFTER]\t%i:\t%f\t->\t%f\n", i, net.layer_input[0][1]+net.layer_input[0][1], net.layer_output[2][0]);
-    }
+    // Get output error again
+    printf("[SAMPLE ERROR] Value: %f\n", sample_error(&net, known_input, known_output, num_samples));
 
     return 0;
 }

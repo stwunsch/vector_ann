@@ -80,8 +80,14 @@ void backward_propagation(struct ann* net, float* known_output);
  **********************************************************/
 void training_cycle(struct ann* net, float** known_input, float** known_output, size_t num_samples);
 
-/*****************************************************
- * Calculate mean error of network output with given *
- * training samples to estimate training progress    *
- *****************************************************/
-void sample_error(struct ann* net, float** known_input, float** known_output, size_t num_samples);
+/*************************************************************
+ * Calculate mean squared error of network output with given *
+ * training samples to estimate training progress            *
+ *************************************************************/
+float sample_error(struct ann* net, float** known_input, float** known_output, size_t num_samples);
+
+/*****************************************************************
+ * Perform full training with (sub-)samples and error evaluation *
+ * to prevent over-training                                      *
+ *****************************************************************/
+void train(struct ann* net, float** train_input, float** train_output, float** eval_input, float** eval_output, size_t num_samples_train_full, size_t num_samples_train_cycle, size_t num_samples_eval);
