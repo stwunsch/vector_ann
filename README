@@ -1,6 +1,6 @@
 vector_ann
 ------------
-Artificial neural network implementation with focus on vectorizable data structures
+Artificial neural network implementation with focus on vectorizable data structures (mainly done cause of educational purposes)
 
 Example output
 --------------
