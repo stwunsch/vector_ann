@@ -74,7 +74,6 @@ void forward_propagation(struct ann* net){
 void backward_propagation(struct ann* net, float* known_output){
     const size_t num_layers = net->num_layers;
     const size_t* num_nodes = net->num_nodes;
-    const float beta = net->beta;
     int i;
     size_t j, k;
 
@@ -105,7 +104,6 @@ void backward_propagation(struct ann* net, float* known_output){
 }
 
 void training_cycle(struct ann* net, float** known_input, float** known_output, size_t num_samples){
-    const size_t num_layers = net->num_layers;
     const size_t* num_nodes = net->num_nodes;
     size_t i, j;
 
@@ -136,19 +134,28 @@ float sample_error(struct ann* net, float** known_input, float** known_output, s
 
 
 void train(struct ann* net, float** train_input, float** train_output, float** eval_input, float** eval_output, size_t num_samples_train_full, size_t num_samples_train_cycle, size_t num_samples_eval){
-    size_t i;
-    float error_initial, error_final;
+    size_t i, cycle_error_min;
+    float error_initial, error_final, error_min;
     float** train_input_cycle = train_input;
     float** train_output_cycle = train_output;
 
+    error_initial = sample_error(net, eval_input, eval_output, num_samples_eval);
+    error_min = error_initial;
+    cycle_error_min = 0;
     for(i=0; i<num_samples_train_full/num_samples_train_cycle; i++){
-        error_initial = sample_error(net, eval_input, eval_output, num_samples_eval);
-
         training_cycle(net, train_input_cycle, train_output_cycle, num_samples_train_cycle);
         train_input_cycle += num_samples_train_cycle;
         train_output_cycle += num_samples_train_cycle;
 
         error_final = sample_error(net, eval_input, eval_output, num_samples_eval);
-        printf("[TRAIN][CYCLE %lu]\tSample error:\t%f\t->\t%f\t(%f)\n", i, error_initial, error_final, error_final-error_initial);
+        printf("[TRAIN][CYCLE %lu] Sample error: initial, final, abs. change, rel. change:\n\t%f\t%f\t%f\t%f\n", i, error_initial, error_final, error_final-error_initial, (error_final-error_initial)/error_initial);
+
+        if(error_final<error_min){
+            error_min = error_final;
+            cycle_error_min = i;
+        }
+        error_initial = error_final;
     }
+
+    printf("[TRAIN][EVAL] Minimal error (%f) in cycle %lu.\n", error_min, cycle_error_min);
 }

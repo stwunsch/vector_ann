@@ -58,11 +58,12 @@ void init_io(struct ann* net);
  * Activation function and derivation *
  **************************************/
 static inline float activ_func(float in, float beta){
-    return 1.0/(1.0+powf(VECTOR_ANN_EULER, -beta*in));
+    return 1.0/(1.0+powf(VECTOR_ANN_EULER, -beta*in)); // soft-step
 }
 
 static inline float activ_func_deriv(float in, float beta){
-    return beta*powf(VECTOR_ANN_EULER, -beta*in)/powf(1.0+powf(VECTOR_ANN_EULER, -beta*in),2.0);
+    float val = activ_func(in, beta);
+    return val*(1.0-val);
 }
 
 /**************************************

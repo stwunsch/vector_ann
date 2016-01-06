@@ -1,2 +1,49 @@
 # vector_ann
 Artificial neural network implementation with focus on vectorizable data structures
+
+Example output
+--------------
+
+See test case qa_full_training:
+
+[TRAIN][CYCLE 0] Sample error: initial, final, abs. change, rel. change:
+	0.195683	0.042361	-0.153322	-0.783521
+[TRAIN][CYCLE 1] Sample error: initial, final, abs. change, rel. change:
+	0.042361	0.042302	-0.000060	-0.001406
+[TRAIN][CYCLE 2] Sample error: initial, final, abs. change, rel. change:
+	0.042302	0.041772	-0.000530	-0.012520
+[TRAIN][CYCLE 3] Sample error: initial, final, abs. change, rel. change:
+	0.041772	0.030073	-0.011699	-0.280066
+[TRAIN][CYCLE 4] Sample error: initial, final, abs. change, rel. change:
+	0.030073	0.022499	-0.007574	-0.251843
+[TRAIN][CYCLE 5] Sample error: initial, final, abs. change, rel. change:
+	0.022499	0.022320	-0.000179	-0.007971
+[TRAIN][CYCLE 6] Sample error: initial, final, abs. change, rel. change:
+	0.022320	0.022216	-0.000104	-0.004678
+[TRAIN][CYCLE 7] Sample error: initial, final, abs. change, rel. change:
+	0.022216	0.022155	-0.000061	-0.002725
+[TRAIN][CYCLE 8] Sample error: initial, final, abs. change, rel. change:
+	0.022155	0.022110	-0.000045	-0.002018
+[TRAIN][CYCLE 9] Sample error: initial, final, abs. change, rel. change:
+	0.022110	0.022090	-0.000021	-0.000932
+[TRAIN][EVAL] Minimal error (0.022090) in cycle 9.
+[TEST 0] in	->	(network output)	(true output)
+		->	0.03			0.00
+[TEST 1] in	->	(network output)	(true output)
+		->	0.04			0.04
+[TEST 2] in	->	(network output)	(true output)
+		->	0.07			0.08
+[TEST 3] in	->	(network output)	(true output)
+		->	0.10			0.12
+[TEST 4] in	->	(network output)	(true output)
+		->	0.14			0.16
+[TEST 5] in	->	(network output)	(true output)
+		->	0.18			0.20
+[TEST 6] in	->	(network output)	(true output)
+		->	0.23			0.24
+[TEST 7] in	->	(network output)	(true output)
+		->	0.28			0.28
+[TEST 8] in	->	(network output)	(true output)
+		->	0.33			0.32
+[TEST 9] in	->	(network output)	(true output)
+		->	0.37			0.36
