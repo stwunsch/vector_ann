@@ -4,6 +4,7 @@ Artificial neural network implementation with focus on vectorizable data structu
 
 Example output
 --------------
+Training of a 4 layer (2,5,5,1) feed-forward network with back-propagation. The network maps the function 0.3*in[0] + 0.2*in[1] (nothing special).
 
 See test case qa_full_training:
 
